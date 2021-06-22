@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
+    "allowJs": true,
     "skipLibCheck": false,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
@@ -12,7 +12,6 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
@@ -20,8 +19,11 @@
       "@components*": ["components*"],
       "@interfaces*": ["interfaces*"],
       "@utils*": ["utils*"]
-    }
+    },
+    "outDir": "dist",
+    "emitDeclarationOnly": true,
+    "declaration": true
   },
-  "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "exclude": ["node_modules", "dist/"],
+  "include": ["**/*.ts", "**/*.tsx", "src/class.jsx"]
 }

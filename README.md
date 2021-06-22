@@ -1,29 +1,78 @@
-# TypeScript + Vite + Tailwind + Eslint + Prettier
+# react-draggable-range
 
+This component allows you to create a draggable range slider. It is intended to give additional flexibility when `input type="range"` is not enough.
 
-This is a really simple project that shows the usage of Vite with TypeScript.
+This is a very minimal package
 
-## How to use it?
+## Installation
 
 ```bash
-1. Clone repo
-git clone https://github.com/CryogenicPlanet/vite-typescript-tailwind-eslint-boilerplate.git
+npm install react-draggable-range
 
+yarn add react-draggable-range
 
-2. Install and Run
-pnpm i
-pnpm dev
+pnpm install react-draggable-range
 ```
 
-## Notes
+## Usage
 
-Other features/quirks
+```tsx
+import React, { useState } from 'react'
 
-1. **PNPM** Faster and more safe efficient package manager
-2. Paths setup for you
-   Eg. You can `import Link from '@components/Link`
-3. Import sorting
-4. Eslint + Prettier Config setup using standard
-5. Tailwind installed setup globally
-6. Husky Commit Hook
-7. Deployment with Netlify setup
+import DragRange from 'react-draggable-range'
+
+const App = () => {
+  const [value, setValue] = useState(10)
+
+  return (
+    <div className="flex flex-col w-full h-screen justify-center items-center">
+      <DragRange
+        min={0}
+        max={100}
+        step={0.1}
+        noOfDecimalPlaces={5}
+        value={value}
+        onChange={v => {
+          setValue(v)
+        }}>
+        <span className="underline cursor-move">Test</span>
+      </DragRange>
+
+      <span className="text-lg">{value}</span>
+    </div>
+  )
+}
+```
+
+### Props
+
+```tsx
+type DragRangeProps = {
+  value: number
+  onChange: (newValue: number) => void
+  axis?: 'x' | 'y' // if it should be on x or y axis, this only kinda works
+  min?: number
+  max?: number
+  step?: number // Increment step
+  noOfDecimalPlaces?: number // deciminal places
+  /**
+   Non Synthetic Events
+   */
+  onDragStart?: (e: MouseEvent) => void
+  onDragEnd?: (e: MouseEvent) => void
+  onMouseUp?: (e: MouseEvent) => void
+  /**
+   React Synthetic Event
+   */
+  onMouseDown?: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void
+  children?: React.ReactNode[] | React.ReactNode
+}
+```
+
+### Credits
+
+Clean up version of the package from https://github.com/Radivarig/react-drag-range using hooks, modern react and typescript.
+
+### SLA
+
+This is just an small package that I needed to dogfood for https://modfy.video and decided to keep open, so don't really expect very many updates and such on this.
