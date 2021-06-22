@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-function App() {
+import DragRange from './DragRange'
+
+const App = () => {
+  const [value, setValue] = useState(10)
+
   return (
-    <div className="w-full flex h-screen justify-center items-center bg-gray-800">
-      <p className="text-3xl text-gray-50 ">
-        Vite <span className="animate-ping">♥️</span> Typescript
-      </p>
+    <div className="flex flex-col w-full h-screen justify-center items-center">
+      <DragRange
+        min={0}
+        max={100}
+        step={0.1}
+        noOfDecimalPlaces={5}
+        value={value}
+        onChange={v => {
+          setValue(v)
+        }}>
+        <span className="underline cursor-move">Test</span>
+      </DragRange>
+
+      <span className="text-lg">{value}</span>
     </div>
   )
 }
